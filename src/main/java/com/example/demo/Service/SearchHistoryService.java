@@ -27,8 +27,12 @@ public class SearchHistoryService {
 
     //Deleting
     public void deleteHistory(String city){
-        SearchHistory history = searchHistoryRepo.findByCityIgnoreCase(city).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Already Deleted"));
-        searchHistoryRepo.delete(history);
+        List<SearchHistory> history = searchHistoryRepo.findByCityIgnoreCase(city);
+
+        if(history.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"SearchHistory not found");
+        }
+        searchHistoryRepo.deleteAll(history);
     }
 
 

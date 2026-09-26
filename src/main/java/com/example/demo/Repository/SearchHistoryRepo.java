@@ -9,7 +9,6 @@ import java.util.Optional;
 @Repository
 public interface SearchHistoryRepo extends JpaRepository<SearchHistory,Long> {
 
-
-    Optional<SearchHistory> findByCityIgnoreCase(String city);
+    List<SearchHistory> findByCityIgnoreCase(String city);
 
 }
